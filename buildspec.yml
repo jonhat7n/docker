@@ -1,0 +1,20 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+      docker: 18
+    commands:
+      # Install AWS SAM & Get public ECR login to download 'lambda python3' image.
+      - pip install --user aws-sam-cli
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+  
+  # Build Lambda docker image to install requirements within in a likely prod environment
+  pre_build:
+    commands:
+      - sam build --use-container
+
+  # Deploy the code to AWS using SAM
+  post_build:
+    commands:
+      - sam deploy --stack-name $STACK_NAME --config-env production

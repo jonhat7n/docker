@@ -1,0 +1,12 @@
+version = 0.1
+[production]
+[production.deploy]
+[production.deploy.parameters]
+stack_name = "qa-spa-lead-stack-batch"
+s3_bucket = "spa-components-east"
+s3_prefix = "spa"
+region = "us-east-1"
+confirm_changeset = false
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+
