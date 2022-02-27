@@ -26,9 +26,9 @@ ADD --chown=${USERNAME} leadscore /app/leadscore
 ADD --chown=${USERNAME} close_train.py /app/close_train.py
 ADD --chown=${USERNAME} requirements.txt /app/requirements.txt
 
-RUN mkdir -p /app/encoding
+#RUN mkdir -p /app/encoding
 
 RUN pip install --no-cache-dir \
     -r requirements.txt \
-    -r leadscore/training/requirements.txt
+    -r /app/leadscore/training/requirements.txt
 ENTRYPOINT ["python3"]
